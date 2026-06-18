@@ -5,10 +5,11 @@ import hero_banner from '../assets/hero_banner.jpg'
 import hero_title from '../assets/hero_title.png'
 import play_icon from '../assets/play_icon.png'
 import info_icon from '../assets/info_icon.png'
+import Footer from '../Components/Footer'
 
 const Home = () => {
   return (
-    <div min-h-screen w-full overflow-x-hidden>
+    <div className='min-h-screen w-full overflow-x-hidden bg-black text-white'>
       <Navbar/>
       <div>
         
@@ -41,10 +42,18 @@ const Home = () => {
          </div>
 
          
-          <TitleCards/>
          
         </div>
+          <TitleCards/>
+          
       </div>
+      <div>
+        <TitleCards title={"Blockbuster Movies"}/>
+        <TitleCards title={"Only On Netflix"}/>
+        <TitleCards title={"Upcoming"}/>
+        <TitleCards title={"Top Pics For You"}/>
+      </div>
+        <Footer/>
     </div>
   )
 }
