@@ -46,9 +46,12 @@ const TitleCards = ({title="Popular on Netflix",category}) => {
 }
 
 export default TitleCards
+<<<<<<< HEAD
 
 
 
 
 
 
+=======
+>>>>>>> 0f20879e1950705b4ad9c260b0b715bd4751750c
