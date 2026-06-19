@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Logo from '../assets/background_banner.jpg'
+import AuthNavbar from '../Components/AuthNavbar'
+
 
 const SignUp = () => {
   const [email, setEmail] = useState('')
@@ -9,7 +11,11 @@ const SignUp = () => {
     e.preventDefault()
   }
   return (
+    <>
+    <AuthNavbar/>
     <section className=' relative w-full h-screen flex items-center justify-center overflow-hidden '>
+      
+      
       <div className='absolute z-10 inset-0 '>
         <img src={Logo} alt="Netflix image" className='w-full h-screen object-cover ' />
         <div className='absolute inset-0 bg-black/50 bg-linear-to-t from-black/90 via-black/20 to-black/90'></div>
@@ -55,6 +61,7 @@ const SignUp = () => {
 
 
     </section>
+    </>
 
 
   )

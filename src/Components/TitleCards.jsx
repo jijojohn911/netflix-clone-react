@@ -1,9 +1,29 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import cards_data from '../assets/cards/Cards_data'
 
 const TitleCards = ({title="Popular on Netflix",category}) => {
 
+  const [apiData,setApiData]=useState([])
+
  const cardRef = useRef();
+ 
+ const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjQ4MzIwZTQzMWMyMGZlZDc2OWMzNTYzZGUxN2UzNSIsIm5iZiI6MTc4MTgwNjQzNy4yNjQsInN1YiI6IjZhMzQzNTY1ZmU3NTY5NjhiMzI3M2JmOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5QPykZakzPNHCmYQs99pxYCoVDnzzQCoRkqwD__OQDg'
+  }
+};
+
+
+  
+  useEffect(()=>{
+    fetch(`https://api.themoviedb.org/3/movie/${category?category:"now_playing"}?language=en-US&page=1`, options)
+  .then(res => res.json())
+  .then(res => setApiData(res.results))
+  .catch(err => console.error(err));
+
+  },[])
 
   const handleWheel = (e) => {
    
@@ -22,20 +42,20 @@ const TitleCards = ({title="Popular on Netflix",category}) => {
         onWheelCapture={handleWheel}
        >
 
-  {cards_data.map((card) => {
+  {apiData.map((card) => {
     return (
       <div
-        key={card.name}
+        key={card.original_title}
         className="relative flex-shrink-0 w-50 md:w-48 overflow-hidden rounded-xl cursor-pointer group"
       >
         <img
-          src={card.image}
+          src={`https://image.tmdb.org/t/p/w500`+card.backdrop_path}
           alt="cards"
           className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-110"
         />
 
         <p className="absolute bottom-2 left-2 text-white font-bold text-sm bg-black/30 px-2 rounded">
-          {card.name}
+          {card.original_title}
         </p>
       </div>
     )
@@ -46,12 +66,3 @@ const TitleCards = ({title="Popular on Netflix",category}) => {
 }
 
 export default TitleCards
-<<<<<<< HEAD
-
-
-
-
-
-
-=======
->>>>>>> 0f20879e1950705b4ad9c260b0b715bd4751750c
