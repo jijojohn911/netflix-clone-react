@@ -7,7 +7,7 @@ const AuthNavbar = () => {
   const [isOpen,setIsOpen]=useState(false);
 
   return (
-    <div  className='fixed top-4  z-11 w-full text-white font-medium flex md:justify-between items-center px-5 py-2 gap-4 md:gap-0 text-[14px] text-[#e5e5e5] '>
+    <div  className='fixed top-4  z-11 w-full text-white font-medium flex md:justify-between items-center px-5 py-2 gap-4 md:gap-0 text-[14px]  '>
       <div>
         <img src={Logo} alt="Logo"  className='w-40 '/>
       </div>

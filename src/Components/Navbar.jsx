@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../assets/logo.png'
 import search_icon from '../assets/search_icon.svg'
 import bell_icon from '../assets/bell_icon.svg'
@@ -6,14 +6,30 @@ import profile_icon from '../assets/profile_img.png'
 import drop_down from '../assets/caret_icon.svg'
 import { NavLink } from 'react-router-dom'
 const Navbar = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY >= 80) {
+                setIsScrolled(true)
+            } else {
+                setIsScrolled(false)
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        }
+    }, [])
     return (
 
-        <div className='fixed top-0 left-0 w-full z-10 flex flex-col md:flex-row md:justify-between items-center px-5 py-2 gap-4 md:gap-0 text-[14px] text-[#e5e5e5] '>
+        <div className={`fixed top-0 left-0 w-full z-20 flex flex-col md:flex-row md:justify-between items-center px-5 py-2 gap-4 md:gap-0 text-[14px] text-[#e5e5e5] transition-all duration-300 ${isScrolled ? 'bg-black shadow-md' : 'bg-transparent'}`}>
             <div className='flex flex-col sm:flex-row items-center gap-80 w-full md:w-auto justify-between md:justify-start '>
                 <img src={logo} alt="Netflix_logo" className='w-30 h-6' />
                 <ul className='hidden sm:flex items-center gap-10 text-sm font-medium whitespace-nowrap'>
-                 <NavLink to={"/"}>   <li className='cursor-pointer hover:text-red-600'>Home</li></NavLink>
+                    <NavLink to={"/"}>   <li className='cursor-pointer hover:text-red-600'>Home</li></NavLink>
                     <li className='cursor-pointer  hover:text-red-600'>TV Shows</li>
                     <li className='cursor-pointer  hover:text-red-600'>Movies</li>
                     <li className='cursor-pointer  hover:text-red-600'>New & Popular</li>

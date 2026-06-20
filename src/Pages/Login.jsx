@@ -4,7 +4,7 @@ import drop_down from '../assets/caret_icon.svg'
 
 const Login = () => {
   return (
-    <div className='bg-gradient-to-b from-red-950 to-black text-white w-screen h-screen'>
+    <div className='bg-linear-to-b from-red-950 to-black text-white w-screen h-screen'>
         <div className='pt-8 pl-5 border-b border-gray-800 ' >
             <img src={Logo} alt="netflix_logo"  className='w-25 mb-5'/>
         </div>
