@@ -5,7 +5,7 @@ import instagram_icon from '../assets/instagram_icon.png'
 import facebook_icon from '../assets/facebook_icon.png'
 const Footer = () => {
     return (
-        <div className='p-30  '>
+        <div className='p-30 '>
             <div className='flex gap-5 w-10 cursor-pointer '>
                 <img src={facebook_icon} alt="" className='w-8 h-8 transition duration-300 hover:brightness-5 hover:contrast-12'
                 />

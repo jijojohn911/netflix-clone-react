@@ -20,7 +20,7 @@ export const Login = async (req, res) => {
         if (!email || !password) {
             return res.status(400).json({ message: 'email and password are required' })
         }
-        const foundUser = await User.findOne({ email })   // model: User, instance: foundUser
+        const foundUser = await User.findOne({ email })  
         if (!foundUser) {
            return res.status(400).json({ message: "Invalid Credentials" })
         }
@@ -54,12 +54,12 @@ export const signup = async (req, res) => {
             return res.status(400).json({ message: "username, password and email are required" });
         }
 
-        const existingUser = await user.findOne({ $or: [{ username }, { email }] });
+        const existingUser = await User.findOne({ $or: [{ username }, { email }] });
         if (existingUser) {
             return res.status(400).json({ message: "username or email is already taken" });
         }
 
-        const newUser = new user({ username, password, email });
+        const newUser = new User({ username, password, email });
         await newUser.save();
 
         return res.status(200).json({
