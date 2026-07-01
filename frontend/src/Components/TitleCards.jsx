@@ -12,10 +12,13 @@ const TitleCards = ({ title = "Popular on Netflix", category,type='movie', onCar
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`
+      Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+      
     }
   }
+  console.log("TMDB Token:", import.meta.env.VITE_TMDB_TOKEN);
 useEffect(() => {
+
     fetch(`https://api.themoviedb.org/3/${type}/${category ? category : "now_playing"}?language=en-US&page=1`, options)
       .then(res => res.json())
       .then(res => {

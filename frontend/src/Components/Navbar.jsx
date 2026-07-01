@@ -4,12 +4,12 @@ import search_icon from '../assets/search_icon.svg'
 import bell_icon from '../assets/bell_icon.svg'
 import profile_icon from '../assets/profile_img.png'
 import drop_down from '../assets/caret_icon.svg'
-import menu_icon from '../assets/menu_icon.svg' // add a hamburger icon to your assets
+import menu_icon from '../assets/menu_icon.svg' 
 import { NavLink, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);       // profile dropdown
+    const [isOpen, setIsOpen] = useState(false);      
     const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ const Navbar = () => {
         navigate('/login')
     }
     return (
-        <div className={`fixed top-0 left-0 w-full z-20 px-5 py-3 text-[14px] text-[#e5e5e5] transition-all duration-300 ${isScrolled ? 'bg-black shadow-md' : 'bg-gradient-to-b from-black/70 to-transparent'}`}>
+        <div className={`fixed top-0 left-0 w-full z-20 px-5 py-3 text-[14px] text-[#e5e5e5] transition-all duration-300 ${isScrolled ? 'bg-black shadow-md' : 'bg-linear-to-b from-black/70 to-transparent'}`}>
             <div className='flex items-center justify-between w-full'>
                 {/* Logo + desktop nav links */}
                 <div className='flex items-center gap-8'>
