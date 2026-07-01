@@ -22,14 +22,14 @@ const App = () => {
         <Route path='tv-shows' element={<ProtectedRouted><TvShow/></ProtectedRouted>}/>
         <Route path='new-and-popular' element={<ProtectedRouted><NewAndPopular/></ProtectedRouted>}/>
         
-        <Route index element={<SignUp />} />
+        <Route index element={<Login />} />
         <Route path='home' element={
           <ProtectedRouted>
           <Home/>
           </ProtectedRouted>
           }
            />
-        <Route path='login' element={<Login />} />
+        <Route path='login' element={<SignUp />} />
         <Route path='player/:id' element={
           <ProtectedRouted>
           <Player />
