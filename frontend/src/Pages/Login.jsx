@@ -71,7 +71,7 @@ const Login = () => {
 
           <p className="text-sm text-gray-400 mt-4 text-center">
             New to Netflix?{' '}
-            <NavLink to="/" className="text-white hover:underline font-medium">
+            <NavLink to="/signup" className="text-white hover:underline font-medium">
               Sign up now
             </NavLink>
           </p>

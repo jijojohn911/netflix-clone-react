@@ -31,7 +31,7 @@ const Navbar = () => {
     const handleSignOut = () => {
         localStorage.removeItem('token')
         localStorage.removeItem('user')
-        navigate('/login')
+        navigate('/')
     }
     return (
         <div className={`fixed top-0 left-0 w-full z-20 px-5 py-3 text-[14px] text-[#e5e5e5] transition-all duration-300 ${isScrolled ? 'bg-black shadow-md' : 'bg-linear-to-b from-black/70 to-transparent'}`}>

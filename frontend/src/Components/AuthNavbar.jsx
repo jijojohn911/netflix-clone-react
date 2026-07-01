@@ -13,7 +13,7 @@ const AuthNavbar = () => {
       </div>
       <div  className='relative flex gap-8 md:flex '>
         <button className=' bg-gray-500/70 p-2 rounded hover:bg-gray-500/90 transition-colors duration-200 ' onClick={()=>setIsOpen(!isOpen)}>Language</button>
-      <NavLink to={'/login'}><button  className='bg-gray-500/70 p-2 px-4 rounded hover:bg-gray-500/90 transition-colors duration-200'>Sign In</button></NavLink>
+      <NavLink to={'/'}><button  className='bg-gray-500/70 p-2 px-4 rounded hover:bg-gray-500/90 transition-colors duration-200'>Sign In</button></NavLink>
         {isOpen &&(
         <div className='absolute top-12 left-2 flex flex-col bg-gray-200  text-black p-2 rounded gap-2 ' >
           <button className=' bg-white p-1 hover:bg-gray-400 rounded'>English</button>
