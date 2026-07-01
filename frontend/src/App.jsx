@@ -29,7 +29,7 @@ const App = () => {
           </ProtectedRouted>
           }
            />
-        <Route path='login' element={<SignUp />} />
+        <Route path='signup' element={<SignUp />} />
         <Route path='player/:id' element={
           <ProtectedRouted>
           <Player />
