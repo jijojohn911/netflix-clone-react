@@ -7,6 +7,7 @@ import userAuth from './routes/userAuthRoutes.js';
 const app = express();
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI;
+let dbError = null;
 
 // If ALLOWED_ORIGINS is set, only those sites can call the API.
 // If it is not set, allow any site (useful for local testing).
@@ -32,7 +33,12 @@ app.get('/', (req, res) => {
 
 app.get('/api/health', (req, res) => {
   const states = ['disconnected', 'connected', 'connecting', 'disconnecting'];
-  res.json({ server: 'ok', database: states[mongoose.connection.readyState] });
+  res.json({
+    server: 'ok',
+    database: states[mongoose.connection.readyState],
+    mongoUriSet: Boolean(MONGO_URI),
+    databaseError: dbError,
+  });
 });
 
 // Return a clear error instead of a generic 500 when the DB is not connected.
@@ -59,5 +65,8 @@ if (!MONGO_URI) {
   mongoose
     .connect(MONGO_URI, { serverSelectionTimeoutMS: 10000 })
     .then(() => console.log('MongoDB connected successfully'))
-    .catch((error) => console.error('Database connection failed:', error.message));
+    .catch((error) => {
+      dbError = error.message;
+      console.error('Database connection failed:', error.message);
+    });
 }
