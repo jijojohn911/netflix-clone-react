@@ -1,7 +1,7 @@
 
 
-import React, { useEffect, useRef, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import  { useEffect, useRef, useState } from 'react'
+
 
 
 const TitleCards = ({ title = "Popular on Netflix", category,type='movie', onCardClick }) => {

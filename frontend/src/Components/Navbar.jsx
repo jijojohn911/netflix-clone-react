@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import logo from '../assets/logo.png'
 import search_icon from '../assets/search_icon.svg'
 import bell_icon from '../assets/bell_icon.svg'

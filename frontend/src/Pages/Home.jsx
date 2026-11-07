@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
 import TitleCards from '../Components/TitleCards'
@@ -38,7 +38,7 @@ const Home = () => {
           alt="hero_banner"
           className="w-full h-[60vh] sm:h-[70vh] md:h-screen object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-black via-black/40 to-transparent" />
 
         <div className="absolute top-1/4 left-4 sm:left-8 md:left-10 z-10 max-w-[85%] sm:max-w-md md:max-w-xl pr-2 sm:pr-6">
           {selectedMovie ? (

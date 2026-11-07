@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import Logo from '../assets/background_banner.jpg'
 import AuthNavbar from '../Components/AuthNavbar'
 import { useNavigate } from 'react-router-dom'
@@ -37,6 +37,7 @@ const SignUp = () => {
       localStorage.setItem('user', JSON.stringify(data.user))
       navigate('/home')
     } catch (err) {
+      console.error(err)
       setError("Could not connect to server")
       
     }finally{

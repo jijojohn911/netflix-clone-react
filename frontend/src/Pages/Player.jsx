@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import arrow from '../assets/back_arrow_icon.png'
 import { useNavigate, useParams } from 'react-router-dom'
 

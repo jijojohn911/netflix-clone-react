@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Logo from '../assets/logo.png'
-import drop_down from '../assets/caret_icon.svg'
-import { Navigate, NavLink, useNavigate } from 'react-router-dom'
+import {  NavLink, useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
@@ -30,6 +29,7 @@ const Login = () => {
       console.log("logged in:", data.user);
 
     } catch (err) {
+      console.error(err)
       setError('Could not connect to server')
     }
   }

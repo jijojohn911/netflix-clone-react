@@ -1,55 +1,63 @@
 import 'dotenv/config';
 import express from 'express';
-import cors from 'cors'
-import userAuth from './routes/userAuthRoutes.js'
+import cors from 'cors';
 import mongoose from 'mongoose';
-
+import userAuth from './routes/userAuthRoutes.js';
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI;
 
-// app.use(cors({
-//     origin:process.env.CLIENT_URL || "*",
-//     credentials:true
-// }));
-
-
-const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(",")
-  : [];
+// If ALLOWED_ORIGINS is set, only those sites can call the API.
+// If it is not set, allow any site (useful for local testing).
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
 app.use(
   cors({
-    origin(origin, callback) {
-      // Allow requests with no Origin (Postman, server-to-server)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error("Not allowed by CORS"));
-    },
+    origin: allowedOrigins.length > 0 ? allowedOrigins : true,
     credentials: true,
   })
 );
+
 app.use(express.json());
-app.use(express.urlencoded({extended:true}))
-app.use('/api',userAuth);
+app.use(express.urlencoded({ extended: true }));
 
+// Health check: open this in the browser to see if the API and DB are working.
+app.get('/', (req, res) => {
+  res.json({ message: 'API is running' });
+});
 
-const connectDB = async ()=>{
-    try {
-        await mongoose.connect(process.env.MONGO_URI)
-        console.log('MongoDB connected successfuly');
-        
-        app.listen(process.env.PORT || 3000,()=>{
-    console.log(`server is running on port ${process.env.PORT }`);
-    })
-    } catch (error) {
-        console.error('Database connection failed:',error.message);
-        process.exit(1);
-    }
+app.get('/api/health', (req, res) => {
+  const states = ['disconnected', 'connected', 'connecting', 'disconnecting'];
+  res.json({ server: 'ok', database: states[mongoose.connection.readyState] });
+});
+
+// Return a clear error instead of a generic 500 when the DB is not connected.
+app.use('/api', (req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({
+      message: 'Database is not connected. Check the MONGO_URI environment variable.',
+    });
+  }
+  next();
+});
+
+app.use('/api', userAuth);
+
+// Start the server first, so the site is reachable even if the DB connection fails.
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+// Connect to MongoDB separately and log the real error if it fails.
+if (!MONGO_URI) {
+  console.error('MONGO_URI is not set. Add it in Render -> Environment.');
+} else {
+  mongoose
+    .connect(MONGO_URI, { serverSelectionTimeoutMS: 10000 })
+    .then(() => console.log('MongoDB connected successfully'))
+    .catch((error) => console.error('Database connection failed:', error.message));
 }
-connectDB()
-
-    
